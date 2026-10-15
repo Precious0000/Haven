@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "ios": { "supportsTablet": false, "bundleIdentifier": "com.example.haven" },
-    "android": { "package": "com.example.haven" }
+    "android": { "package": "com.example.haven" },
+    "web": { "bundler": "metro", "output": "single" }
   }
 }

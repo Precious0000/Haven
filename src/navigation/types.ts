@@ -15,6 +15,8 @@ export type RootStackParamList = {
   Emergency: undefined;
   DailyCheckIn: undefined;
   VoiceCheckIn: undefined;
+  BloodPressure: undefined;
+  Glucose: undefined;
   ComingSoon: { title: string };
 };
 

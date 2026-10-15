@@ -41,7 +41,8 @@ const SLIDES: { title: string; body: string; photos: [Photo, Photo] }[] = [
 ];
 
 export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) {
-  const { width } = useWindowDimensions();
+    const { width: windowWidth } = useWindowDimensions();
+  const width = Math.min(windowWidth, 430);
   const scale = width / 402;
   const listRef = useRef<FlatList>(null);
   const [index, setIndex] = useState(0);

@@ -11,6 +11,7 @@ import { SignUpHealthScreen } from '../screens/auth/SignUpHealthScreen';
 import { SignUpFamilyScreen } from '../screens/auth/SignUpFamilyScreen';
 import { SignUpMedicationsScreen } from '../screens/auth/SignUpMedicationsScreen';
 import { VoiceAssistantScreen } from '../screens/main/VoiceAssistantScreen';
+import { ChatScreen } from '../screens/main/ChatScreen';
 import { ComingSoon } from '../components/ComingSoonScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -28,6 +29,7 @@ export function RootNavigator() {
       <Stack.Screen name="SignUpMedications" component={SignUpMedicationsScreen} />
       <Stack.Screen name="Main" component={MainTabs} options={{ animation: 'fade', gestureEnabled: false }} />
       <Stack.Screen name="VoiceAssistant" component={VoiceAssistantScreen} options={{ animation: 'fade_from_bottom' }} />
+      <Stack.Screen name="Chat" component={ChatScreen} options={{ animation: 'fade_from_bottom' }} />
       <Stack.Screen
         name="ComingSoon"
         options={{ headerShown: true, title: '' }}

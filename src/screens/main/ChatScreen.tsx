@@ -26,7 +26,7 @@ export function ChatScreen({ navigation }: RootScreenProps<'Chat'>) {
   const [typing, setTyping] = useState(true);
   const [text, setText] = useState('');
   const scrollRef = useRef<ScrollView>(null);
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const reply = () => {
     setTyping(true);

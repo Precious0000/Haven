@@ -72,6 +72,7 @@ export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) 
   const width = Math.min(windowWidth, 430);
   const listRef = useRef<FlatList>(null);
   const [index, setIndex] = useState(0);
+  const [listH, setListH] = useState(0);
   const last = index === SLIDES.length - 1;
 
   const goTo = (i: number) => {
@@ -84,6 +85,7 @@ export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) 
       <FlatList
         ref={listRef}
         style={{ flex: 1 }}
+        onLayout={(e) => setListH(e.nativeEvent.layout.height)}
         data={SLIDES}
         horizontal
         pagingEnabled
@@ -92,7 +94,7 @@ export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) 
         onMomentumScrollEnd={(e) => setIndex(Math.round(e.nativeEvent.contentOffset.x / width))}
         getItemLayout={(_, i) => ({ length: width, offset: width * i, index: i })}
         renderItem={({ item, index: i }) => (
-          <View style={{ width, flex: 1, paddingTop: 16 }}>
+         <View style={{ width, height: listH, paddingTop: 16 }}>
             <PhotoArea slideIndex={i} width={width} />
             <View style={styles.dots}>
               {SLIDES.map((_, d) => (

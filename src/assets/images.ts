@@ -1,18 +1,11 @@
 import { ImageSourcePropType } from 'react-native';
 
-/**
- * TODO: export these images from Figma into /assets and replace `null` with require(...).
- * Until then, screens render a neutral placeholder.
- *
- * Onboarding photos, two per slide (Figma frames 453:37687, 453:37882, 453:37914:
- * nodes "Rectangle 4229" and "Rectangle 4230" in each frame).
- * Example: require('../../assets/onboarding-1a.png')
- */
-export const onboardingPhotos: (ImageSourcePropType | null)[][] = [
-  [null, null],
-  [null, null],
-  [null, null],
+// Onboarding photos, two per slide. They were exported from Figma already tilted.
+export const onboardingPhotos: ImageSourcePropType[][] = [
+  [require('../../assets/Rectangle_4229.png'), require('../../assets/Rectangle_4230.png')],
+  [require('../../assets/Rectangle_4231.png'), require('../../assets/Rectangle_4232.png')],
+  [require('../../assets/Rectangle_4233.png'), require('../../assets/Rectangle_4234.png')],
 ];
 
-/** Home screen avatar (Figma frame 477:37962). */
+/** Home screen avatar. TODO: export it from Figma and add it to /assets. */
 export const avatar: ImageSourcePropType | null = null;

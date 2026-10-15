@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Platform } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -11,6 +11,7 @@ const navTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background
 
 export default function App() {
   const [loaded] = useFonts({ DMSans_400Regular, DMSans_600SemiBold, DMSans_700Bold });
+
   if (!loaded) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.bg }}>
@@ -18,7 +19,8 @@ export default function App() {
       </View>
     );
   }
-  return (
+
+  const app = (
     <SafeAreaProvider>
       <NavigationContainer theme={navTheme}>
         <StatusBar style="dark" />
@@ -26,4 +28,28 @@ export default function App() {
       </NavigationContainer>
     </SafeAreaProvider>
   );
+
+  // On the web, show the app in a phone-width column centred on the page.
+  if (Platform.OS === 'web') {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#e3ebeb' }}>
+        <View
+          style={{
+            flex: 1,
+            width: '100%',
+            maxWidth: 430,
+            backgroundColor: colors.bg,
+            overflow: 'hidden',
+            borderLeftWidth: 1,
+            borderRightWidth: 1,
+            borderColor: '#cfd9d9',
+          }}
+        >
+          {app}
+        </View>
+      </View>
+    );
+  }
+
+  return app;
 }

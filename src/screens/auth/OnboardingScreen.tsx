@@ -9,6 +9,8 @@ import { onboardingPhotos } from '../../assets/images';
 
 const CARD_W = 204;
 const CARD_H = 227;
+const DESIGN_W = 402;
+const GROUP_H = 330; // approximate height of the photo group in the Figma design
 
 type Photo = { cx: number; cy: number; rotate: number };
 
@@ -40,10 +42,39 @@ const SLIDES: { title: string; body: string; photos: [Photo, Photo] }[] = [
   },
 ];
 
+function PhotoArea({ slideIndex, width }: { slideIndex: number; width: number }) {
+  const [h, setH] = useState(0);
+  const sx = width / DESIGN_W;
+  const sy = h > 0 ? Math.min(1, h / GROUP_H) : 1; // shrink photos when space is tight
+  const centreY = 275; // vertical middle of the photo group in the design
+  return (
+    <View style={{ flex: 1, minHeight: 160 }} onLayout={(e) => setH(e.nativeEvent.layout.height)}>
+      {h > 0 &&
+        SLIDES[slideIndex].photos.map((p, k) => {
+          const src = onboardingPhotos[slideIndex]?.[k];
+          return (
+            <View
+              key={k}
+              style={[
+                styles.photo,
+                {
+                  left: p.cx * sx - CARD_W / 2,
+                  top: h / 2 + (p.cy - centreY) * sy - CARD_H / 2,
+                  transform: [{ rotate: `${p.rotate}deg` }, { scale: sy }],
+                },
+              ]}
+            >
+              {src ? <Image source={src} style={styles.photoImg} /> : <View style={[styles.photoImg, { backgroundColor: colors.sage30 }]} />}
+            </View>
+          );
+        })}
+    </View>
+  );
+}
+
 export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) {
-    const { width: windowWidth } = useWindowDimensions();
+  const { width: windowWidth } = useWindowDimensions();
   const width = Math.min(windowWidth, 430);
-  const scale = width / 402;
   const listRef = useRef<FlatList>(null);
   const [index, setIndex] = useState(0);
   const last = index === SLIDES.length - 1;
@@ -57,6 +88,7 @@ export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) 
     <SafeAreaView style={styles.root} edges={['top', 'bottom']}>
       <FlatList
         ref={listRef}
+        style={{ flex: 1 }}
         data={SLIDES}
         horizontal
         pagingEnabled
@@ -65,27 +97,8 @@ export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) 
         onMomentumScrollEnd={(e) => setIndex(Math.round(e.nativeEvent.contentOffset.x / width))}
         getItemLayout={(_, i) => ({ length: width, offset: width * i, index: i })}
         renderItem={({ item, index: i }) => (
-          <View style={{ width }}>
-            <View style={{ height: 470 }}>
-              {item.photos.map((p, k) => {
-                const src = onboardingPhotos[i]?.[k];
-                return (
-                  <View
-                    key={k}
-                    style={[
-                      styles.photo,
-                      {
-                        left: p.cx * scale - CARD_W / 2,
-                        top: p.cy - CARD_H / 2 - 44,
-                        transform: [{ rotate: `${p.rotate}deg` }],
-                      },
-                    ]}
-                  >
-                    {src ? <Image source={src} style={styles.photoImg} /> : <View style={[styles.photoImg, { backgroundColor: colors.sage30 }]} />}
-                  </View>
-                );
-              })}
-            </View>
+          <View style={{ width, flex: 1, paddingTop: 16 }}>
+            <PhotoArea slideIndex={i} width={width} />
             <View style={styles.dots}>
               {SLIDES.map((_, d) => (
                 <View key={d} style={[styles.dot, d === i && styles.dotActive]} />
@@ -113,7 +126,7 @@ export function OnboardingScreen({ navigation }: RootScreenProps<'Onboarding'>) 
             />
           </>
         ) : (
-          <View style={[styles.row, { justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12 }]}>
+          <View style={[styles.row, { justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, height: 100 }]}>
             <Pressable onPress={() => goTo(SLIDES.length - 1)} hitSlop={12}>
               <Text style={styles.skip}>Skip</Text>
             </Pressable>
@@ -141,12 +154,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   photoImg: { width: '100%', height: '100%' },
-  dots: { flexDirection: 'row', gap: 4, alignItems: 'center', justifyContent: 'center' },
+  dots: { flexDirection: 'row', gap: 4, alignItems: 'center', justifyContent: 'center', marginTop: 16 },
   dot: { width: 6, height: 6, borderRadius: 10, backgroundColor: colors.sage30 },
   dotActive: { width: 42, backgroundColor: colors.sage80 },
-  title: { fontFamily: fonts.semibold, fontSize: 24, lineHeight: 28, color: colors.dark12, letterSpacing: -0.72, textAlign: 'center', marginTop: 48, paddingHorizontal: 16 },
-  body: { fontFamily: fonts.regular, fontSize: 16, lineHeight: 20, color: colors.dark8, letterSpacing: -0.48, textAlign: 'center', marginTop: 13, paddingHorizontal: 52 },
-  footer: { position: 'absolute', left: 20, right: 20, bottom: 36, gap: 8 },
+  title: { fontFamily: fonts.semibold, fontSize: 24, lineHeight: 28, color: colors.dark12, letterSpacing: -0.72, textAlign: 'center', marginTop: 24, paddingHorizontal: 16 },
+  body: { fontFamily: fonts.regular, fontSize: 16, lineHeight: 20, color: colors.dark8, letterSpacing: -0.48, textAlign: 'center', marginTop: 10, paddingHorizontal: 40 },
+  footer: { paddingHorizontal: 20, paddingTop: 16, paddingBottom: 24, gap: 8 },
   row: { flexDirection: 'row', gap: 20 },
   skip: { fontFamily: fonts.regular, fontSize: 14, color: colors.sage100, letterSpacing: -0.42 },
   nextOuter: { borderWidth: 1, borderColor: colors.navy60, borderRadius: 100, padding: 2 },

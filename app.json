@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Haven",
+    "slug": "haven-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": { "supportsTablet": false, "bundleIdentifier": "com.example.haven" },
+    "android": { "package": "com.example.haven" }
+  }
+}

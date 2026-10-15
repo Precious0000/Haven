@@ -13,6 +13,8 @@ export type RootStackParamList = {
   VoiceAssistant: undefined;
   Chat: undefined;
   Emergency: undefined;
+  DailyCheckIn: undefined;
+  VoiceCheckIn: undefined;
   ComingSoon: { title: string };
 };
 

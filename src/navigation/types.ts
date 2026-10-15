@@ -11,6 +11,7 @@ export type RootStackParamList = {
   SignUpMedications: undefined;
   Main: undefined;
   VoiceAssistant: undefined;
+  Chat: undefined;
   ComingSoon: { title: string };
 };
 

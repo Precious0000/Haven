@@ -8,4 +8,5 @@ export const onboardingPhotos: ImageSourcePropType[][] = [
 ];
 
 /** Home screen avatar. TODO: export it from Figma and add it to /assets. */
-export const avatar: ImageSourcePropType | null = null;
+/** Home screen avatar. */
+export const avatar: ImageSourcePropType | null = require('../../assets/Ellipse_423.png');

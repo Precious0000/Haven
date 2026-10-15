@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, Platform } from 'react-native';
+import { View, ActivityIndicator, Platform, Alert } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -8,6 +8,11 @@ import { RootNavigator } from './src/navigation/RootNavigator';
 import { colors } from './src/theme';
 
 const navTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: colors.bg } };
+if (Platform.OS === 'web') {
+  Alert.alert = (title: string, message?: string) => {
+    window.alert([title, message].filter(Boolean).join('\n\n'));
+  };
+}
 
 export default function App() {
   const [loaded] = useFonts({ DMSans_400Regular, DMSans_600SemiBold, DMSans_700Bold });

@@ -70,8 +70,11 @@ export function HomeScreen({ navigation }: Props) {
               key={a.label}
               style={styles.action}
               // TODO: in the real app the emergency screen opens from fall detection, not from this button.
-              onPress={() => (a.label === 'Report issues' ? navigation.navigate('Emergency') : navigation.navigate('ComingSoon', { title: a.label }))}
-            >
+                           onPress={() => {
+                if (a.label === 'Report issues') navigation.navigate('Emergency');
+                else if (a.label === 'Daily check-in') navigation.navigate('DailyCheckIn');
+                else navigation.navigate('ComingSoon', { title: a.label });
+              }}
               <Ionicons name={a.icon} size={18} color={a.color} />
               <Text style={styles.actionText}>{a.label}</Text>
             </Pressable>

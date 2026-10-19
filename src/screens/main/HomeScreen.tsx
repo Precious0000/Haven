@@ -25,7 +25,7 @@ const GROUPS = [
     ],
   },
   // The second group is collapsed (and partly hidden by the tab bar) in the design.
-  { title: 'Next medication', meta: 'Today', items: [] as { name: string; detail: string }[] },
+  { title: 'Afternoon medication', meta: 'Today · Due 07:30 pm', items: [] as { name: string; detail: string }[] },
 ];
 
 const ACTIONS: { label: string; icon: keyof typeof Ionicons.glyphMap; color: string }[] = [
@@ -38,6 +38,17 @@ const ACTIONS: { label: string; icon: keyof typeof Ionicons.glyphMap; color: str
 export function HomeScreen({ navigation }: Props) {
   const [open, setOpen] = useState(0);
   const [taken, setTaken] = useState<Record<string, boolean>>({});
+
+  const onAction = (label: string) => {
+    if (label === 'Report issues') {
+      // TODO: in the real app the emergency screen opens from fall detection, not from this button.
+      navigation.navigate('Emergency');
+    } else if (label === 'Daily check-in') {
+      navigation.navigate('DailyCheckIn');
+    } else {
+      navigation.navigate('ComingSoon', { title: label });
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.bg }} edges={['top']}>
@@ -66,15 +77,7 @@ export function HomeScreen({ navigation }: Props) {
 
         <View style={styles.grid}>
           {ACTIONS.map((a) => (
-                      <Pressable
-              key={a.label}
-              style={styles.action}
-              // TODO: in the real app the emergency screen opens from fall detection, not from this button.
-                           onPress={() => {
-                if (a.label === 'Report issues') navigation.navigate('Emergency');
-                else if (a.label === 'Daily check-in') navigation.navigate('DailyCheckIn');
-                else navigation.navigate('ComingSoon', { title: a.label });
-              }}
+            <Pressable key={a.label} style={styles.action} onPress={() => onAction(a.label)} accessibilityRole="button">
               <Ionicons name={a.icon} size={18} color={a.color} />
               <Text style={styles.actionText}>{a.label}</Text>
             </Pressable>

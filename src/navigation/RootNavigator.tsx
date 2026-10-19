@@ -17,6 +17,7 @@ import { DailyCheckInScreen } from '../screens/main/DailyCheckInScreen';
 import { VoiceCheckInScreen } from '../screens/main/VoiceCheckInScreen';
 import { BloodPressureScreen } from '../screens/main/BloodPressureScreen';
 import { GlucoseScreen } from '../screens/main/GlucoseScreen';
+import { AddContactScreen } from '../screens/main/AddContactScreen';
 import { ComingSoon } from '../components/ComingSoonScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -36,6 +37,7 @@ export function RootNavigator() {
       <Stack.Screen name="VoiceAssistant" component={VoiceAssistantScreen} options={{ animation: 'fade_from_bottom' }} />
       <Stack.Screen name="BloodPressure" component={BloodPressureScreen} />
       <Stack.Screen name="Glucose" component={GlucoseScreen} />
+            <Stack.Screen name="AddContact" component={AddContactScreen} />
       <Stack.Screen name="Chat" component={ChatScreen} options={{ animation: 'fade_from_bottom' }} />
       <Stack.Screen name="Emergency" component={EmergencyScreen} options={{ animation: 'fade', gestureEnabled: false }} />
             <Stack.Screen name="DailyCheckIn" component={DailyCheckInScreen} />

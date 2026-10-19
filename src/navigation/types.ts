@@ -17,7 +17,13 @@ export type RootStackParamList = {
   VoiceCheckIn: undefined;
   BloodPressure: undefined;
   Glucose: undefined;
-  AddContact: undefined;
+   AddContact: undefined;
+  EditProfile: undefined;
+  Medications: undefined;
+  Language: undefined;
+  Privacy: undefined;
+  HelpCenter: undefined;
+  About: undefined;
   ComingSoon: { title: string };
 };
 

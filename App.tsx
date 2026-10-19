@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, DMSans_400Regular, DMSans_600SemiBold, DMSans_700Bold } from '@expo-google-fonts/dm-sans';
 import { RootNavigator } from './src/navigation/RootNavigator';
+import { ContactsProvider } from './src/contacts';
 import { colors } from './src/theme';
 
 const navTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: colors.bg } };
@@ -29,7 +30,9 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer theme={navTheme}>
         <StatusBar style="dark" />
-        <RootNavigator />
+               <ContactsProvider>
+          <RootNavigator />
+        </ContactsProvider>
       </NavigationContainer>
     </SafeAreaProvider>
   );

@@ -24,6 +24,13 @@ export type RootStackParamList = {
   Privacy: undefined;
   HelpCenter: undefined;
   About: undefined;
+   Notifications: undefined;
+    ActivityLog: undefined;
+    CallContacts: undefined;
+    ReportIssue: undefined;
+    MedicationSchedule: undefined;
+    MedicationDetail: { id: string };
+
   ComingSoon: { title: string };
 };
 

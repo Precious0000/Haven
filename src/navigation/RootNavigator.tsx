@@ -24,6 +24,13 @@ import { LanguageScreen } from '../screens/settings/LanguageScreen';
 import { PrivacyScreen } from '../screens/settings/PrivacyScreen';
 import { HelpCenterScreen } from '../screens/settings/HelpCenterScreen';
 import { AboutScreen } from '../screens/settings/AboutScreen';
+import { NotificationsScreen } from '../screens/main/NotificationsScreen';
+    import { ActivityLogScreen } from '../screens/main/ActivityLogScreen';
+    import { CallContactsScreen } from '../screens/main/CallContactsScreen';
+    import { ReportIssueScreen } from '../screens/main/ReportIssueScreen';
+    import { MedicationScheduleScreen } from '../screens/main/MedicationScheduleScreen';
+    import { MedicationDetailScreen } from '../screens/main/MedicationDetailScreen';
+
 import { ComingSoon } from '../components/ComingSoonScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -50,6 +57,12 @@ export function RootNavigator() {
       <Stack.Screen name="Privacy" component={PrivacyScreen} />
       <Stack.Screen name="HelpCenter" component={HelpCenterScreen} />
       <Stack.Screen name="About" component={AboutScreen} />
+      <Stack.Screen name="Notifications" component={NotificationsScreen} />
+    <Stack.Screen name="ActivityLog" component={ActivityLogScreen} />
+    <Stack.Screen name="CallContacts" component={CallContactsScreen} />
+    <Stack.Screen name="ReportIssue" component={ReportIssueScreen} />
+    <Stack.Screen name="MedicationSchedule" component={MedicationScheduleScreen} />
+    <Stack.Screen name="MedicationDetail" component={MedicationDetailScreen} />
       <Stack.Screen name="Chat" component={ChatScreen} options={{ animation: 'fade_from_bottom' }} />
       <Stack.Screen name="Emergency" component={EmergencyScreen} options={{ animation: 'fade', gestureEnabled: false }} />
             <Stack.Screen name="DailyCheckIn" component={DailyCheckInScreen} />

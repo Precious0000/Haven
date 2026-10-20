@@ -7,6 +7,7 @@ import { useFonts, DMSans_400Regular, DMSans_600SemiBold, DMSans_700Bold } from 
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { ContactsProvider } from './src/contacts';
 import { SettingsProvider } from './src/settings';
+import { CareProvider } from './src/careData';
 import { colors } from './src/theme';
 
 const navTheme = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: colors.bg } };
@@ -32,9 +33,11 @@ export default function App() {
       <NavigationContainer theme={navTheme}>
         <StatusBar style="dark" />
          <SettingsProvider>
-          <ContactsProvider>
-            <RootNavigator />
-          </ContactsProvider>
+         <ContactsProvider>
+      <CareProvider>
+        <RootNavigator />
+      </CareProvider>
+    </ContactsProvider>
         </SettingsProvider>
       </NavigationContainer>
     </SafeAreaProvider>
